@@ -11,6 +11,8 @@ It includes automatic image updates — no rebuilds or manual pulls required.
 Make sure you have:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- Linux OS (or WSL) - **(OPTIONAL)**
+  - Window users can also run the APP via WSL. See [WSL](https://github.com/CYGUBICKO/wsl-setup) for installation instructions.
 
 ---
 
@@ -19,5 +21,16 @@ Make sure you have:
 Clone this repository:
 
 ```bash
-git clone https://github.com/aphrc-nocode/no-code-production.git
-cd no-code-production
+git clone https://github.com/aphrc-nocode/no-code-prod.git
+cd no-code-prod
+```
+
+---
+
+### Start the App
+
+```bash
+docker compose up -d
+```
+
+The app can be accessed via [http://localhost:3838](http://localhost:3838) or [http://127.0.0.1:3838](http://127.0.0.1:3838)
