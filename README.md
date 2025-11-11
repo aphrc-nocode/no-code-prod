@@ -34,3 +34,26 @@ docker compose up -d
 ```
 
 The app can be accessed via [http://localhost:3838](http://localhost:3838) or [http://127.0.0.1:3838](http://127.0.0.1:3838)
+
+
+### Stop the App
+
+```bash
+docker compose down -v
+```
+
+### Cleanup (Optional)
+
+Remove the container
+
+```bash
+docker rm -f no-code-app
+```
+
+Cleanup dangling images
+
+```bash
+docker system prune -f
+```
+
+
