@@ -10,7 +10,7 @@ services:
       - log_files:/usr/no-code-app/.log_files
       - models:/usr/no-code-app/models
       - recipes:/usr/no-code-app/recipes
-      - output:/usr/no-code-app/output
+      - outputs:/usr/no-code-app/output
       - logs:/usr/no-code-app/logs
 
 ##   watchtower:
@@ -26,5 +26,5 @@ volumes:
 	log_files:
 	models:
 	recipes:
-	output:
+	outputs:
 	logs:
