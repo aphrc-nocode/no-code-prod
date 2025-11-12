@@ -1,6 +1,6 @@
 services:
   no-code-app:
-    image: scygu/no-code-app:latest 
+    image: scygu/no-code-app:v.0.1 
     container_name: no-code-app
     restart: always
     ports:
@@ -13,11 +13,11 @@ services:
       - output:/usr/no-code-app/output
       - logs:/usr/no-code-app/logs
 
-  watchtower:
-    image: containrrr/watchtower 
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 3600 --cleanup 
+##   watchtower:
+##     image: containrrr/watchtower 
+##     container_name: watchtower
+##     restart: always
+##     volumes:
+##       - /var/run/docker.sock:/var/run/docker.sock
+##     command: --interval 3600 --cleanup 
 
