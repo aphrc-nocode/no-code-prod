@@ -1,6 +1,6 @@
 services:
   no-code-app:
-    image: scygu/no-code-app:v.0.1 
+    image: scygu/no-code-app:v.0.1
     container_name: no-code-app
     restart: always
     ports:
@@ -21,3 +21,10 @@ services:
 ##       - /var/run/docker.sock:/var/run/docker.sock
 ##     command: --interval 3600 --cleanup 
 
+volumes:
+	datasets:
+	log_files:
+	models:
+	recipes:
+	output:
+	logs:
