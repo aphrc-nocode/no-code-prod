@@ -4,7 +4,7 @@ services:
     container_name: no-code-app
     restart: always
     ports:
-      - "3838:3838"    
+      - "3838:3838"
     volumes:
       - datasets:/usr/no-code-app/datasets
       - log_files:/usr/no-code-app/.log_files
@@ -13,18 +13,18 @@ services:
       - outputs:/usr/no-code-app/output
       - logs:/usr/no-code-app/logs
 
-##   watchtower:
-##     image: containrrr/watchtower 
-##     container_name: watchtower
-##     restart: always
-##     volumes:
-##       - /var/run/docker.sock:/var/run/docker.sock
-##     command: --interval 3600 --cleanup 
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   container_name: watchtower
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   command: --interval 3600 --cleanup
 
 volumes:
-	datasets:
-	log_files:
-	models:
-	recipes:
-	outputs:
-	logs:
+  datasets:
+  log_files:
+  models:
+  recipes:
+  outputs:
+  logs:
