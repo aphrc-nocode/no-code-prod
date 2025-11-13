@@ -1,6 +1,6 @@
 services:
   no-code-app:
-    image: scygu/no-code-app:v.0.1
+    image: scygu/no-code-app:v.0.2
     container_name: no-code-app
     restart: always
     ports:
