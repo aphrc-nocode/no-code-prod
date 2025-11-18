@@ -1,3 +1,16 @@
+networks:
+  no-code-network:
+    driver: bridge
+
+volumes:
+  datasets:
+  log_files:
+  models:
+  recipes:
+  outputs:
+  output:
+  logs:
+
 services:
   no-code-app:
     image: scygu/no-code-app:v.0.2
@@ -13,20 +26,22 @@ services:
       - outputs:/usr/no-code-app/outputs
       - output:/usr/no-code-app/output
       - logs:/usr/no-code-app/logs
+    depends_on:
+      - no-code-pycaret
+    networks:
+      - no-code-network
 
-  # watchtower:
-  #   image: containrrr/watchtower
-  #   container_name: watchtower
-  #   restart: always
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   command: --interval 3600 --cleanup
-
-volumes:
-  datasets:
-  log_files:
-  models:
-  recipes:
-  outputs:
-  output:
-  logs:
+  no-code-pycaret:
+    image: scygu/no-code-pycaret:v.0.1
+    container_name: no-code-pycaret
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - models:/usr/no-code-pycaret/models
+      - logs:/usr/no-code-pycaret/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    networks:
+      - no-code-network
