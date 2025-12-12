@@ -10,10 +10,11 @@ volumes:
   outputs:
   output:
   logs:
+  users_db:
 
 services:
   no-code-app:
-    image: scygu/no-code-app:v.0.2
+    image: scygu/no-code-app:latest
     container_name: no-code-app
     restart: always
     ports:
@@ -26,13 +27,14 @@ services:
       - outputs:/usr/no-code-app/outputs
       - output:/usr/no-code-app/output
       - logs:/usr/no-code-app/logs
+      - users_db:/usr/no-code-app/users_db
     depends_on:
       - no-code-pycaret
     networks:
       - no-code-network
 
   no-code-pycaret:
-    image: scygu/no-code-pycaret:v.0.1
+    image: scygu/no-code-pycaret:latest
     container_name: no-code-pycaret
     restart: always
     ports:

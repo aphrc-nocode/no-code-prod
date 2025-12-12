@@ -30,7 +30,7 @@ cd no-code-prod
 ### Start the App
 
 ```bash
-docker compose up -d
+./start.sh
 ```
 
 The app can be accessed via [http://localhost:3838](http://localhost:3838) or [http://127.0.0.1:3838](http://127.0.0.1:3838)
@@ -39,21 +39,5 @@ The app can be accessed via [http://localhost:3838](http://localhost:3838) or [h
 ### Stop the App
 
 ```bash
-docker compose down -v
+./stop.sh
 ```
-
-### Cleanup (Optional)
-
-Remove the container
-
-```bash
-docker rm -f no-code-app
-```
-
-Cleanup dangling images
-
-```bash
-docker system prune -f
-```
-
-
