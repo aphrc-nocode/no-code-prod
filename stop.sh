@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CLEAN=""
-
 for arg in "$@"
 do
     if [ "$arg" == "--clean" ] || [ "$arg" == "-c" ]
