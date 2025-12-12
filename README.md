@@ -27,6 +27,12 @@ cd no-code-prod
 
 ---
 
+### Create file permission
+
+```bash
+chmod +x start.sh stop.sh
+```
+
 ### Start the App
 
 ```bash
@@ -41,3 +47,7 @@ The app can be accessed via [http://localhost:3838](http://localhost:3838) or [h
 ```bash
 ./stop.sh
 ```
+
+### Troubleshooting
+
+- Ensure `docker` has sudo access
