@@ -16,8 +16,9 @@ services:
   nginx:
     image: nginx:alpine
     container_name: no-code-nginx
+    restart: always
     ports:
-      - "80:80"
+      - "8088:8088"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -29,9 +30,8 @@ services:
     image: scygu/no-code-app:latest
     container_name: no-code-app
     restart: always
-    # OPTIONAL: remove this once nginx works
-    # ports:
-    #   - "3838:3838"
+    expose:
+       - "3838"
     volumes:
       - datasets:/usr/no-code-app/datasets
       - log_files:/usr/no-code-app/.log_files
