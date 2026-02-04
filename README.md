@@ -33,7 +33,7 @@ cd no-code-prod
 ./start.sh
 ```
 
-The app can be accessed via [http://localhost:3838](http://localhost:3838) or [http://127.0.0.1:3838](http://127.0.0.1:3838)
+The app can be accessed via [http://localhost:8088](http://localhost:8088) or [http://127.0.0.1:8088](http://127.0.0.1:8088)
 
 
 ### Stop the App
