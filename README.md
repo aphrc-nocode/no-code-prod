@@ -10,7 +10,7 @@ It includes automatic image updates — no rebuilds or manual pulls required.
 ### Prerequisites
 Make sure you have:
 - [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker Swarm](https://docs.docker.com/engine/swarm/)
 - Linux OS (or WSL) - **(OPTIONAL)**
   - Window users can also run the APP via WSL. See [WSL](https://github.com/CYGUBICKO/wsl-setup) for installation instructions.
 
@@ -33,7 +33,7 @@ cd no-code-prod
 ./start.sh
 ```
 
-The app can be accessed via [http://localhost:8088](http://localhost:8088) or [http://127.0.0.1:8088](http://127.0.0.1:8088)
+The app can be accessed via the url: *IP:8088* also shown when the app is started.
 
 
 ### Stop the App
@@ -41,3 +41,20 @@ The app can be accessed via [http://localhost:8088](http://localhost:8088) or [h
 ```bash
 ./stop.sh
 ```
+
+### Troubleshooting
+
+At times, with Docker Swarm you need to initialize to set the correct IP:
+
+
+```bash
+docker swarm init --advertise-addr IP
+```
+
+Where IP can be obtained via:
+
+
+```bash
+hostname -I
+```
+
