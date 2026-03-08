@@ -58,3 +58,14 @@ Where IP can be obtained via:
 hostname -I
 ```
 
+Docker group issues: The service fails to start due docker group permission:
+
+```bash
+sudo mkdir -p /etc/systemd/system/docker.socket.d
+sudo tee /etc/systemd/system/docker.socket.d/override.conf <<EOF
+[Socket]
+SocketMode=0666
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker.socket
+```
