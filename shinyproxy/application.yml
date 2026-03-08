@@ -1,0 +1,27 @@
+proxy:
+  title: AUTOML No-Code Platform
+  port: 3838
+  forward-headers-strategy: native
+  hide-navbar: true
+  authentication: none
+  docker:
+    internal-networking: true
+    url: unix:///var/run/docker.sock
+  specs:
+    - id: no-code-app
+      display-name: AUTOML No-Code Platform
+      container-image: scygu/no-code-app:latest
+      container-network: nocode_no-code-network
+      container-name: no-code-app-shared
+      max-instances: 1
+      stop-on-logout: true
+      heartbeat-timeout: -1
+      container-volumes:
+        - nocode_userdata:/usr/no-code-app
+      container-env:
+        PYCARET_URL: http://no-code-pycaret:8000
+      container-wait-for-image: true
+
+logging:
+  file:
+    name: /opt/shinyproxy/logs/shinyproxy.log

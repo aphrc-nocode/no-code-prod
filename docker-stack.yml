@@ -1,0 +1,84 @@
+networks:
+  no-code-network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  userdata:
+    driver: local
+  pycaret_data:
+    driver: local
+  logs:
+    driver: local
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8088:8088"
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+    networks:
+      - no-code-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+
+  shinyproxy:
+    image: openanalytics/shinyproxy:latest
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ./shinyproxy/application.yml
+        target: /opt/shinyproxy/application.yml
+    networks:
+      - no-code-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+      resources:
+        limits:
+          cpus: "16"
+          memory: 32G
+        reservations:
+          cpus: "8"
+          memory: 16G
+
+  no-code-app:
+    image: scygu/no-code-app:latest
+    networks:
+      - no-code-network
+    volumes:
+      - userdata:/usr/no-code-app
+    deploy:
+      replicas: 0
+      restart_policy:
+        condition: none
+
+  no-code-pycaret:
+    image: scygu/no-code-pycaret:latest
+    networks:
+      - no-code-network
+    volumes:
+      - pycaret_data:/usr/no-code-pycaret
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+      resources:
+        limits:
+          cpus: "8"
+          memory: 8G
+        reservations:
+          cpus: "4"
+          memory: 4G
