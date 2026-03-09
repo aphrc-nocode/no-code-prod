@@ -1,0 +1,63 @@
+networks:
+  no-code-network:
+    driver: bridge
+
+volumes:
+  datasets:
+  log_files:
+  models:
+  recipes:
+  outputs:
+  output:
+  logs:
+  users_db:
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: no-code-nginx
+    restart: always
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - no-code-app
+    networks:
+      - no-code-network
+
+  no-code-app:
+    image: scygu/no-code-app:latest
+    container_name: no-code-app
+    restart: always
+    expose:
+       - "3838"
+    volumes:
+      - datasets:/usr/no-code-app/datasets
+      - log_files:/usr/no-code-app/.log_files
+      - models:/usr/no-code-app/models
+      - recipes:/usr/no-code-app/recipes
+      - outputs:/usr/no-code-app/outputs
+      - output:/usr/no-code-app/output
+      - logs:/usr/no-code-app/logs
+      - users_db:/usr/no-code-app/users_db
+    depends_on:
+      - no-code-pycaret
+    networks:
+      - no-code-network
+
+  no-code-pycaret:
+    image: scygu/no-code-pycaret:latest
+    container_name: no-code-pycaret
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - models:/usr/no-code-pycaret/models
+      - logs:/usr/no-code-pycaret/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    networks:
+      - no-code-network
+
