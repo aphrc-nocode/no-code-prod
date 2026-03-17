@@ -17,7 +17,7 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/aphrc-nocode/no-code-prod.git
-cd no-code-prod
+cd no-code-prod/compose
 ```
 
 ---
